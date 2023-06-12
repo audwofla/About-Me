@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: cadetblue;
+    margin-bottom: 30px;
+}
+h2 {
+    color: cadetblue;
+    margin-bottom: 30px;
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 10px;
+    align-items: center;
+}
+.bgImage {
+    display: flex;
+
+}
+.soup {
+    background-image: url(korean-tofu-soup.jpg);
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+}
+
+.soupText {
+  margin-left: 10px;
+}
+
+#name {
+    background-color:bisque;
+}
+
+#cover {
+    background-color: azure;
+}
+
+#author {
+    background-color:bisque;
+}
+
+#summary {
+    background-color:azure;
+}
+.social {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.social #facebook {
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
+    margin-right: 30px;
+
+}
+
+.social #twitter {
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
+    margin-right: 30px;
+}
