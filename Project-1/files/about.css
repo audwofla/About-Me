@@ -1,0 +1,22 @@
+h2 {
+    text-align: center;
+}
+
+.abox .aboutme {
+    display: flex;
+    text-align: center;
+    max-width: 45%;
+    background-color: white;
+    
+    
+    
+    
+}
+
+.abox {
+    display: flex;
+    margin: 25px 25px 25px 25px;
+    justify-content: space-around;
+    background-image: url(violinbg.png);
+    margin-bottom: 100px;
+}
