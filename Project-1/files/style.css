@@ -89,7 +89,6 @@ body {
 
 #line {
     display: flex;
-    background-color: black;
     height: 2px;
     border-bottom: 1px;
     margin-top: 79px;
