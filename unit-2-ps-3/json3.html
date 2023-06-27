@@ -43,10 +43,10 @@
                         $('#items').append(option);
                     })
 
-                    document.getElementById("filter").addEventListener("click", filter);
+                    $("#filter").on("click", filter);
                     function filter() {
-                        document.getElementById("json3").innerHTML = "Songs: " + '<br>';
-                        currGenre = document.getElementById("items").value;
+                        $("#json3").html("Songs: <br>");
+                        let currGenre = $("#items").val();
                         $.each(songs, function(i, song) {
                             $.each(song.genre, function(j, genre) {
                                 if (currGenre == genre) {
