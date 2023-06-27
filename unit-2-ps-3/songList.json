@@ -1,0 +1,73 @@
+{
+    "songs": [
+        {   
+        "title": "Tell Her",
+        "artist": "Bruno Major",
+        "genre": ["R&B", "Soul"],
+        "year": 2023
+        },
+
+        {   
+        "title": "About Time",
+        "artist": "Sarah Kang",
+        "genre": ["Jazz Pop", "R&B"],
+        "year": 2022
+        },
+
+        {   
+        "title": "Me After You",
+        "artist": "Paul Kim",
+        "genre": ["Ballad", "K-Pop"],
+        "year": 2018
+        },
+
+        {   
+        "title": "Beautiful Stranger",
+        "artist": "Laufey",
+        "genre": ["Jazz Pop"],
+        "year": 2022
+        },
+
+        {   
+        "title": "Easy",
+        "artist": "Mac Ayres",
+        "genre": ["R&B"],
+        "year": 2017
+        },
+
+        {   
+        "title": "Everything Goes On",
+        "artist": "Porter Robinson",
+        "genre": ["Pop","EDM"],
+        "year": 2022
+        },
+            
+        {   
+        "title": "Clarity",
+        "artist": "Zedd",
+        "genre": ["EDM", "Pop"],
+        "year": 2012
+        },
+        
+        {   
+        "title": "Close To You",
+        "artist": "The Carpenters",
+        "genre": ["Pop", "Soft Rock"],
+        "year": 1970
+        },
+        
+        {   
+        "title": "Some",
+        "artist": "BOL4",
+        "genre": ["K-Pop"],
+        "year": 2018
+        },
+        
+        {   
+        "title": "Wild Flower",
+        "artist": "Park Hyo Shin",
+        "genre": ["Ballad", "K-Pop"],
+        "year": 2014
+        }
+    ]
+}

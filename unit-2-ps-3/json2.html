@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>json2</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <h1>json2</h1>
+        <div id="json2"></div>
+
+        <script>
+            $(document).ready(function(){
+                $.get("songList.json", function(data){
+                    $.each(data.songs, function(index, song) {
+                        let titleDiv = $('<div>').text(song.title);
+                        let artistDiv = $('<div>').text("Artist: " + song.artist);
+                        let genreDiv = $('<div>').text("Genre: " + song.genre.join(", "));
+                        let yearDiv = $('<div>').text("Released " + song.year);  
+                        let songDiv = $('<div>').append(titleDiv, artistDiv, genreDiv, yearDiv);
+                        $('#json2').append(songDiv, '<br>');
+                    });
+                });
+            });
+        </script>
+        
+
+    </body>
+
+</html>

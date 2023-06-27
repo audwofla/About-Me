@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>json3</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <h1>json3</h1>
+        <form name="form1"> 
+            <label for="items">Genre</label>
+            <select id="items" name="items">
+            </select><br><br>
+            <button type="button" id="filter" name="filter">Filter</button>
+        </form><br>
+        <div id="json3"></div>
+
+        <script>
+            $(document).ready(function(){
+                const genres = [];
+                $.get("songList.json", function(data){
+                    let songs = data.songs;
+
+                    $.each(songs, function(index, song) {
+                        $.each(song.genre, function(index, genre) {
+                            genres.push(genre);
+                        });
+                    });
+
+                    $.each(genres, function(index, genre) {
+                        for (let i = index + 1; i < genres.length; i++) {
+                            console.log(index);
+                            if (genres[index] == genres[i]) {
+                                genres.splice(i, 1);
+                                i--;
+                            }
+                        }
+                    })
+
+                    $.each(genres, function(index, genre) {
+                        let option = $('<option>').text(genres[index])
+                        $('#items').append(option);
+                    })
+
+                    document.getElementById("filter").addEventListener("click", filter);
+                    function filter() {
+                        document.getElementById("json3").innerHTML = "Songs: " + '<br>';
+                        currGenre = document.getElementById("items").value;
+                        $.each(songs, function(i, song) {
+                            $.each(song.genre, function(j, genre) {
+                                if (currGenre == genre) {
+                                    let titleDiv = $('<div>').text(song.title);
+                                    $('#json3').append('<br>',titleDiv);
+                                }
+                            })
+                        });
+                    }
+                }); 
+            });
+            
+        </script>
+        
+
+    </body>
+
+</html>
