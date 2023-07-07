@@ -150,3 +150,52 @@ button {
     height: 40px;
     border: none;
 }
+
+@media (max-width: 750px) {
+    .box {
+        display: flex;
+        outline: .1px solid #666666;
+        padding: 10px;
+        margin: 5px;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+    }
+    .firstRow button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 7px;
+        width: 55px;
+        height: 65px;
+        background-color: #666666;
+        color: white;
+        border: none;
+    
+    }
+    .secondRow button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 7px;
+        width: 55px;
+        height: 65px;
+        background-color: #666666;
+        color: white;
+        border: none;
+    
+    }
+    .thirdRow button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 7px;
+        width: 55px;
+        height: 65px;
+        background-color: #666666;
+        color: white;
+        border: none;
+    
+    }
+  }
