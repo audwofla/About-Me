@@ -5,22 +5,41 @@ for (let i = 65; i <= 90; i++) {
   const letter = String.fromCharCode(i);
   letters[letter] = letter;
 }
+let word = wordArray[Math.floor(Math.random() * 6)];
 
 window.onload = function() {
+    fetch('https://random-word-api.herokuapp.com/word?length=5')
+    .then(response => response.json())
+    .then(data => {
+    word = data[0].toUpperCase();
+    console.log(word);
+    })
+
+    if (!isWord(word)){
+    fetch('https://random-word-api.herokuapp.com/word?length=5')
+    .then(response => response.json())
+    .then(data => {
+    word = data[0].toUpperCase();
+    console.log(word);
+    })
+    }
+    
+    
     let game = true;
-    let word = wordArray[Math.floor(Math.random() * 6)];
+    //let word = wordArray[Math.floor(Math.random() * 6)];
     const arr = [];
     let num = 0;
     console.log(word);
     let buttons = document.querySelectorAll('.keyboard button');
     let enter = document.getElementById('enter');
     let backspace = document.getElementById('backspace');
-  
+
+    
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             let keyValue = button.textContent;
-            if (game) {
-              keyPress(keyValue); 
+            if(game) {
+            keyPress(keyValue); 
             }
         });
     });
@@ -32,7 +51,7 @@ window.onload = function() {
         }
         if(game) {
             keyPress(keyValue); 
-          }
+            }
     });
 
   
@@ -49,7 +68,7 @@ window.onload = function() {
             document.getElementsByClassName("box")[arr.length + num - 1].innerHTML = arr[arr.length - 1];
         }
         
-        if (arr.length == 5 && isWord(arr) && keyValue == "Enter") {
+        if (arr.length == 5 && isWord(arr.join("").toLowerCase()) && keyValue == "Enter") {
             let tempWord = word.split("");
 
             tempWord.forEach((element, i) => {
@@ -67,19 +86,31 @@ window.onload = function() {
                     
                 }
             }
+            console.log(tempWord)
+            console.log(tempWord[0])
+            console.log(tempWord[1])
+            console.log(tempWord[2])
+            console.log(tempWord[3])
+            console.log(tempWord[4])
 
             for (let i = 0; i <= 4; i++)  {
                 for (let j = 0; j <= 4; j++) {
-                    if (arr[i] == tempWord[j]) {
+                    if (arr[i] == tempWord[j] && tempWord[i] != "") {
                         yellowChange(arr[i], word);
                         document.getElementsByClassName("box")[i + num].style.backgroundColor = "#decd4e";
                         tempWord[j] = " ";
                     }
                 }
             }
+            console.log(tempWord)
+            console.log(tempWord[0])
+            console.log(tempWord[1])
+            console.log(tempWord[2])
+            console.log(tempWord[3])
+            console.log(tempWord[4])
 
             if (word == arr.join("")) {
-                alert("You won in " + (1 + num/5) + " tries!");
+                alert("You guessed " + word.toLowerCase() +  " in " + (1 + num/5) + " tries!");
                 game = endGame();
                 num -=5;
             }
@@ -103,10 +134,15 @@ function isLetter(value) {
   return /^[a-zA-Z]$/.test(value);
 }
 
-function isWord(arr) {
-    let word = arr.join("")
-    return true;
-}
+function isWord(word) {
+    console.log("Checking word...")
+    return fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word)
+      .then(response => response.json())
+      .then(data => {
+        return word == data[0].word;
+      })
+  }
+
 
 function greenChange(value) {
     if (value in letters) {
