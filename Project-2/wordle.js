@@ -15,13 +15,12 @@ window.onload = function() {
     let buttons = document.querySelectorAll('.keyboard button');
     let enter = document.getElementById('enter');
     let backspace = document.getElementById('backspace');
-
-    
+  
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             let keyValue = button.textContent;
-            if(game) {
-            keyPress(keyValue); 
+            if (game) {
+              keyPress(keyValue); 
             }
         });
     });
@@ -33,7 +32,7 @@ window.onload = function() {
         }
         if(game) {
             keyPress(keyValue); 
-            }
+          }
     });
 
   
