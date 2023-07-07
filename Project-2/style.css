@@ -4,12 +4,12 @@ body {
     margin: 0px;
 }
 
+
+
 .container {
     display: flex; 
     flex-direction: column;
     margin: 0px;
-    
-
 }
 
 
@@ -150,7 +150,6 @@ button {
     height: 40px;
     border: none;
 }
-
 @media (max-width: 750px) {
     .box {
         display: flex;
@@ -168,7 +167,7 @@ button {
         justify-content: center;
         margin: 7px;
         width: 55px;
-        height: 65px;
+        height: 75px;
         background-color: #666666;
         color: white;
         border: none;
@@ -180,7 +179,7 @@ button {
         justify-content: center;
         margin: 7px;
         width: 55px;
-        height: 65px;
+        height: 75px;
         background-color: #666666;
         color: white;
         border: none;
@@ -192,7 +191,7 @@ button {
         justify-content: center;
         margin: 7px;
         width: 55px;
-        height: 65px;
+        height: 75px;
         background-color: #666666;
         color: white;
         border: none;
