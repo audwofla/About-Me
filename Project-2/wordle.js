@@ -16,11 +16,13 @@ window.onload = function() {
     let enter = document.getElementById('enter');
     let backspace = document.getElementById('backspace');
 
-    if (game) {
+    
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             let keyValue = button.textContent;
+            if(game) {
             keyPress(keyValue); 
+            }
         });
     });
   
@@ -29,9 +31,11 @@ window.onload = function() {
         if (keyValue === "Enter") {
             event.preventDefault();
         }
-        keyPress(keyValue); 
+        if(game) {
+            keyPress(keyValue); 
+            }
     });
-}
+
   
 
     function keyPress(keyValue) {
