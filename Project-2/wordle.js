@@ -1,4 +1,3 @@
-const wordArray = ["ADIEU", "LIGHT", "SHINE", "READS", "FIRES", "BOOKS", "YODEL"];
 const letters = {};
 
 for (let i = 65; i <= 90; i++) {
@@ -9,16 +8,8 @@ for (let i = 65; i <= 90; i++) {
 let word = '';
 
 window.onload = function() {
-    getRandomWord()
-    .then(randomWord => {
-    word = randomWord.toUpperCase();
-        if (!isWord(word.toLowerCase())) {
-        return getRandomWord();
-        }
-    return word;
-    })
-    .then(validWord => {
-        word = validWord;
+    fetchValidWord().then(validWord => {
+        word = validWord; 
         let game = true;
         const arr = [];
         let num = 0;
@@ -34,76 +25,80 @@ window.onload = function() {
                 }
             });
         });
-    console.log(word.toLowerCase());
+        console.log(word.toLowerCase());
 
-    document.addEventListener("keydown", function(event) {
-        let keyValue = event.key;
-        if (keyValue === "Enter") {
-            event.preventDefault();
-        }
-        if (game) {
-            keyPress(keyValue);
-        }
-    });
+        document.addEventListener("keydown", function(event) {
+            let keyValue = event.key;
+            if (keyValue === "Enter") {
+                event.preventDefault();
+            }
+            if (game) {
+                keyPress(keyValue);
+            }
+        });
 
-    function keyPress(keyValue) {
-        if (isLetter(keyValue) && arr.length < 5) {
-            arr.push(keyValue.toUpperCase());
-        }
-        if ((keyValue == "Backspace" || keyValue == "⇐") && arr.length > 0) {
-            arr.pop();
-            document.getElementsByClassName("box")[arr.length + num].innerHTML = "";
-        }
-        if (arr.length > 0) {
-            document.getElementsByClassName("box")[arr.length + num - 1].innerHTML = arr[arr.length - 1];
-        }
+        function keyPress(keyValue) {
+            if (isLetter(keyValue) && arr.length < 5) {
+                arr.push(keyValue.toUpperCase());
+            }
+            if ((keyValue == "Backspace" || keyValue == "⇐") && arr.length > 0) {
+                arr.pop();
+                document.getElementsByClassName("box")[arr.length + num].innerHTML = "";
+            }
+            if (arr.length > 0) {
+                document.getElementsByClassName("box")[arr.length + num - 1].innerHTML = arr[arr.length - 1];
+            }
 
-        if (arr.length == 5 && keyValue == "Enter") {
-            isWord(arr.join("").toLowerCase())
-            .then(Word => {
-                if (Word) {
-                    let tempWord = word.split("");
-                    tempWord.forEach((element, i) => {
-                        if (element != "") {
-                            blackChange(arr[i], word);
-                            document.getElementsByClassName("box")[i + num].style.backgroundColor = "#666666";
-                        }
-                    });
+            if (arr.length == 5 && keyValue == "Enter") {
+                isWord(arr.join("").toLowerCase())
+                .then(Word => {
+                    if (Word) {
+                        let tempWord = word.split("");
+                        tempWord.forEach((element, i) => {
+                            if (element != "") {
+                                blackChange(arr[i], word);
+                                document.getElementsByClassName("box")[i + num].style.backgroundColor = "#666666";
+                            }
+                        });
 
-                    for (let i = 0; i <= 4; i++) {
-                        if (arr[i] == tempWord[i]) {
-                            greenChange(arr[i]);
-                            document.getElementsByClassName("box")[i + num].style.backgroundColor = "#4ead64";
-                            tempWord[i] = "";
-                        }
-                    }
-
-                    for (let i = 0; i <= 4; i++) {
-                        for (let j = 0; j <= 4; j++) {
-                            if (arr[i] == tempWord[j] && tempWord[i] != "") {
-                                yellowChange(arr[i], word);
-                                document.getElementsByClassName("box")[i + num].style.backgroundColor = "#decd4e";
-                                tempWord[j] = " ";
+                        for (let i = 0; i <= 4; i++) {
+                            if (arr[i] == tempWord[i]) {
+                                greenChange(arr[i]);
+                                document.getElementsByClassName("box")[i + num].style.backgroundColor = "#4ead64";
+                                tempWord[i] = "";
                             }
                         }
-                    }
 
-                    if (word == arr.join("")) {
-                        alert("You guessed " + word.toLowerCase() + " in " + (1 + num / 5) + " tries!");
-                        game = endGame();
-                        num -= 5;
-                    }
+                        for (let i = 0; i <= 4; i++) {
+                            for (let j = 0; j <= 4; j++) {
+                                if (arr[i] == tempWord[j] && tempWord[i] != "") {
+                                    yellowChange(arr[i], word);
+                                    document.getElementsByClassName("box")[i + num].style.backgroundColor = "#decd4e";
+                                    tempWord[j] = " ";
+                                }
+                            }
+                        }
 
-                    for (let i = arr.length - 1; i >= 0; i--) {
-                        arr.pop();
-                    }
-
-                    num += 5;
-
-                    if (num == 30) {
-                        alert("Game Over!\nThe word was " + word.toLowerCase());
-                        game = endGame();
-                    }
+                        if (word == arr.join("")) {
+                            document.getElementsByClassName("h2")[0].innerHTML = "You Win!";
+                            document.getElementsByClassName("p")[0].innerHTML = "Word: " + word.toLowerCase() + '<br>' + "Attempt(s): " + (1 + num / 5);
+                            game = endGame();
+                            
+                            num -= 5;
+                        }
+    
+                        for (let i = arr.length - 1; i >= 0; i--) {
+                            arr.pop();
+                        }
+    
+                        num += 5;
+    
+                        if (num == 30) {
+                            document.getElementsByClassName("h2")[0].innerHTML = "Game Over";
+                            document.getElementsByClassName("p")[0].innerHTML = "The word was " + word.toLowerCase() + "."
+                            game = endGame();
+                            
+                        }
                     }
                 })
             }
@@ -111,24 +106,44 @@ window.onload = function() {
     })    
 };
 
-function endGame() {
-    return false;
+function randomWord() {
+    fetch('https://random-word-api.herokuapp.com/word?length=5')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data[0].toUpperCase());
+        console.log(isWord(data[0]))
+    });
 }
 
-  function isLetter(value) {
-    return /^[a-zA-Z]$/.test(value);
-}
-
-  function isWord(word) {
+function isWord(word) {
     return fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word)
     .then(response => response.json())
     .then(data => {
         if (data.hasOwnProperty("title")) {
-          return false;
+            return false;
         } else {
-          return true;
+            return true;
         }
     });
+}
+
+async function fetchValidWord() {
+    let isValid = false;
+    let validWord;
+
+    while (!isValid) {
+        validWord = await getRandomWord(); 
+        isValid = await isWord(validWord); 
+
+        if (isValid) {
+            return validWord; 
+        }
+        
+    }
+}
+
+function isLetter(value) {
+    return /^[a-zA-Z]$/.test(value);
 }
 
 function getRandomWord() {
@@ -136,10 +151,7 @@ function getRandomWord() {
     .then(response => response.json())
     .then(data => {
         let word = data[0].toUpperCase();
-        if (!isWord(word.toLowerCase())) {
-            return getRandomWord();
-        }
-    return word;
+        return word;
     });
 }
 
@@ -165,4 +177,17 @@ function blackChange(value, word) {
     if (value in letters) {
         document.getElementById(value).style.backgroundColor = "#2e2e2d";
     }
+}
+
+function endGame() {
+    openPopup()
+    return false;
+}
+
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+  
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
 }
