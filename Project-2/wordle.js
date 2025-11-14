@@ -107,7 +107,7 @@ window.onload = function() {
 };
 
 function randomWord() {
-    fetch('https://random-word-api.herokuapp.com/word?length=5')
+    fetch('https://random-word-api.vercel.app/api?words=1&length=5')
     .then(response => response.json())
     .then(data => {
         console.log(data[0].toUpperCase());
@@ -147,7 +147,7 @@ function isLetter(value) {
 }
 
 function getRandomWord() {
-    return fetch('https://random-word-api.herokuapp.com/word?length=5')
+    return fetch('https://random-word-api.vercel.app/api?words=1&length=5')
     .then(response => response.json())
     .then(data => {
         let word = data[0].toUpperCase();
